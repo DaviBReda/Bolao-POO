@@ -40,7 +40,6 @@ public class Bolao
             return;
         }
 
-        aposta.inserirJogadores(jogadores);
         aposta.inserirNumeros();
         apostas.add(aposta);
     }
@@ -96,7 +95,14 @@ public class Bolao
             }
         }
         else
+        {
             System.out.println("Não é possível dividir o prêmio, pois não há apostas vencedoras.");
+        }
         
+        //Zerar o saldo dos jogadores após o sorteio.
+        for(Jogador jogador : jogadores)
+        {
+            jogador.saldo = 0.0;
+        }
     }
 }
