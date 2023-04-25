@@ -1,13 +1,16 @@
 package Models;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import javax.print.DocFlavor.STRING;
 
 public class Pessoa {
     protected String nome;
     protected String cpf;
-    
+    private ArrayList<String> cpfs;
     public Pessoa(){
-
+        cpfs = new ArrayList<String>();
         Scanner sc = new Scanner(System.in);
         
         System.out.println("Digite o nome da pessoa: ");
@@ -21,4 +24,7 @@ public class Pessoa {
         System.out.println("Nome: " + this.nome);
         System.out.println("CPF: " + this.cpf);
     }
+
+
+
 }
