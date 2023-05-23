@@ -31,7 +31,7 @@ public class Controle {
             if (jogador.comparaNome(nome)){
                 if(!this.jogadoresDaSessaoAtual.contains(jogador)){
                     Jogador jogadorSessaoAtual = new Jogador(jogador.retornaNome());
-                    jogadorSessaoAtual.setPontos(0);
+                    jogadorSessaoAtual.setPontos(-1);
                     this.jogadoresDaSessaoAtual.add(jogadorSessaoAtual);    
                 }
                 return jogador;
@@ -41,6 +41,16 @@ public class Controle {
         jogadores.add(jogador);
         this.jogadoresDaSessaoAtual.add(jogador);
         return jogador;
+    }
+    
+    public Jogador atualizarJogadoresAtuais(String nome, int pontos){
+        for (Jogador jogador : jogadoresDaSessaoAtual){
+            if (jogador.comparaNome(nome)){
+                jogador.atualizarRecorde(pontos);
+                return jogador;
+            }
+        }
+        return null;
     }
     
     public void salvarArq(){
@@ -118,7 +128,6 @@ public class Controle {
         String nomeRecordistaDaSessao = "";
 
         for(Jogador jogador : this.jogadoresDaSessaoAtual) {
-            jogador.setPontos(pontos);
             if(jogador.comparaPontos(recordeDaSessao)){
                 recordeDaSessao = jogador.getPontos();
                 nomeRecordistaDaSessao = jogador.retornaNome();
@@ -141,6 +150,7 @@ public class Controle {
             else {
                 this.atual.atualizarRecorde((count));
                 this.salvarArq();
+                this.atualizarJogadoresAtuais(this.atual.retornaNome(), count);
                 if(this.errou(count)) {
                     this.correta = "";
                     this.bemVindo();
